@@ -2,6 +2,7 @@ class Show < ApplicationRecord
   has_many :listings
   has_many :users, through: :listings
   belongs_to :channel
+  has_many :favorites
 
   validates :title, presence: true, uniqueness: { scope: :channel_id } # Validates uniqueness of title and channel
   validates :current_season, presence: true, numericality: { greater_than: 0 }
@@ -18,7 +19,7 @@ class Show < ApplicationRecord
     end
   end
 
-  def shows_watchlists_by_user(user_id)
+  def shows_favorites_by_user(user_id)
     self.listings.where(user_id: user_id)
   end
 

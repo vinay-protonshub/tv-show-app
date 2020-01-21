@@ -4,10 +4,7 @@ RSpec.describe Show, type: :model do
   before(:all) do
     @show1 = create(:show)
     @user1 = create(:user)
-    @watchlist1 = create(:watchlist)
-    @show1.genres.create([attributes_for(:genre), attributes_for(:genre)])
-    Listing.create( watchlist: @watchlist1,
-                        show: @show1,
+    Listing.create(     show: @show1,
                         user: @user1,
                         user_season: 1)
   end
@@ -18,19 +15,9 @@ RSpec.describe Show, type: :model do
 
   it { is_expected.to belong_to :channel }
 
-  it 'has many watchlists' do
-    should have_many(:watchlists).
-    through (:listings)
-  end
-
   it 'has many users' do
     should have_many(:users).
     through (:listings)
-  end
-
-  it 'has many genres' do
-    should have_many(:genres).
-    through (:show_genres)
   end
 
   it { should validate_presence_of(:title) }

@@ -7,9 +7,6 @@
   <li class="nav-item mb-3">
     <%= button_to "Add New Show", new_show_path, :method => "get", class: "btn btn-info btn-block" %>
   </li>
-  <li class="nav-item">
-    <%= button_to "Back to my Watchlists", user_watchlists_path(current_user), :method => "get", class: "btn btn-info btn-block" %>
-  </li>
 </ul>
 <% end %>
 
@@ -26,7 +23,6 @@
   <br>
   <p>Browse By:
   <div class="btn-group" role="group">
-    <%= button_to "Genre", genres_path, :method => "get", class: "btn btn-outline-secondary" %>
     <%= button_to "Channel", channels_path, :method => "get", class: "btn btn-outline-secondary" %>
   </div>
   </p>

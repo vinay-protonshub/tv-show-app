@@ -14,8 +14,7 @@ class ShowsController < ApplicationController
   end
 
   def show
-    binding.pry 
-    @listings = @show.shows_watchlists_by_user(current_user.id)
+    @listings = @show.shows_favorites_by_user(current_user.id)
   end
 
   def new
@@ -34,6 +33,19 @@ class ShowsController < ApplicationController
   end
 
   def edit
+  end
+
+  def mark_as_favorite
+    favorite = current_user.favorites.create(show_id: params[:show_id])
+    time = Time.now + (favorite.show.time.to_i*60*60) - 30.minutes
+    EmailWorker.perform_at(time, "send_notification", favorite.show.id)
+    redirect_to shows_path
+  end
+
+  def unmark_as_favorite
+    favorite = current_user.favorites.find_by(show_id: params[:show_id])
+    favorite.destroy
+    redirect_to shows_path
   end
 
   def update

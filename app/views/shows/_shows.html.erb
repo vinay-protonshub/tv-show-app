@@ -12,6 +12,11 @@
         <th scope="row"><%= link_to show.title, show_path(show) %></th>
         <td><%= show.channel.name %></td>
         <td><%= show.current_season %></td>
+        <% unless current_user.is_favorite_show(show) %>
+          <td><%= link_to 'Mark as favorite', show_mark_as_favorite_path(show) %></td>
+        <% else %>
+          <td><%= link_to 'Un mark from favorites', show_unmark_as_favorite_path(show) %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

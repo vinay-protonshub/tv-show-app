@@ -6,10 +6,10 @@ class EmailWorker
     send(action, args)
   end
 
-  def send_notification list_id
-  	@list = List.find(list_id)
+  def send_notification show_id, user_id
+    @user = User.find(user_id)
   	@show = Show.find(show_id)
-    ShowMailer.notified_for_show(@list)
+    ShowMailer.notified_for_show(@show, @user)
   end
 
 end

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def new
     if logged_in?
-      redirect_to user_watchlists_path(current_user)
+      redirect_to shows_path
     else
       @user = User.new
     end
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_watchlists_path(@user)
+      redirect_to shows_path
     else
       render :new
     end
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         render :layout => "application"
       else
         flash[:danger] = "You don't have access to view that user's settings!"
-        redirect_to user_watchlists_path(@user)
+        redirect_to shows_path
       end
     else
       redirect_to login_path
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_watchlists_path(@user)
+      redirect_to shows_path
     else
       render :new
     end

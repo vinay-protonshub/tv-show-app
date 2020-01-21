@@ -1,10 +1,8 @@
 class Listing < ApplicationRecord
-  belongs_to :watchlist
   belongs_to :show
   belongs_to :user
 
   validates :user_season, presence: true, numericality: { greater_than: 0 }
-  validates :watchlist_id, uniqueness: { scope: :show_id }, :on => :create
   validate :user_season_vs_current_season
 
   DAY = {"monday": 1,"tuesday": 2,"wednesday": 3,"thursday": 4, "friday": 5,"saturday": 6, "sunday": 7}
