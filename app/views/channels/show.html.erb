@@ -1,0 +1,21 @@
+<% content_for :header do %>
+  <h1><%= @channel.name %></h1>
+<% end %>
+
+<% content_for :vertical_nav do %>
+  <ul class="nav flex-column">
+    <li class="nav-item mb-3">
+      <%= button_to "Back to Channels", channels_path, :method => "get", class: "btn btn-info btn-block" %>
+    </li>
+    <li class="nav-item">
+      <%= button_to "Back to Shows", shows_path, :method => "get", class: "btn btn-info btn-block" %>
+    </li>
+  </ul>
+<% end %>
+
+<% content_for :content do %>
+  <p>Shows:</p>
+  <% alphebetize(@shows).each do |show| %>
+    <p><%= link_to show.title, show_path(show) %></p>
+  <% end %>
+<% end %>

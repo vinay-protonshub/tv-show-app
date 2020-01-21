@@ -1,0 +1,11 @@
+<h1>Login</h1>
+<p><%= button_to "Login with Google", '/auth/google', class: "btn btn-outline-primary" %></p>
+<p>or enter in your details below:</p>
+
+<%= form_for(:session, url: login_path) do |f| %>
+  <strong><%= f.label :email %></strong> <%= f.text_field :email, class:"form-control"  %><br>
+  <strong><%= f.label :password %></strong> <%= f.password_field :password, class:"form-control"  %><br>
+  <%= f.submit "Login", class: "btn btn-primary" %>
+<% end %>
+
+<p>New user? <%= link_to "Sign up!", new_user_path %></p>

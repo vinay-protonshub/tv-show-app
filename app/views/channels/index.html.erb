@@ -1,0 +1,18 @@
+<% content_for :header do %>
+  <h1>Channels</h1>
+<% end %>
+
+<% content_for :vertical_nav do %>
+  <ul class="nav flex-column">
+    <li class="nav-item mb-3">
+      <%= button_to "Back to Shows", shows_path, :method => "get", class: "btn btn-info btn-block" %>
+    </li>
+  </ul>
+<% end %>
+
+<% content_for :content do %>
+  <p>Click on a Channel below to find more shows</p>
+  <% alphebetize(@channels).each do |channel| %>
+    <p><%= link_to channel.name, channel_path(channel) %></p>
+  <% end %>
+<% end %>

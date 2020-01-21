@@ -1,0 +1,38 @@
+<% if @show.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+    <% @show.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_for(show) do |f| %>
+  <strong><%= f.label :title %></strong>
+  <%= f.text_field :title, class:"form-control" %><br>
+
+  <strong><%= f.label "Show Description" %></strong>
+  <%= f.text_area :description, class:"form-control" %><br>
+
+  <div class="form-group">
+    <strong><%= f.label :channel %></strong><br>
+    <%= f.collection_select :channel_id, alphebetize(Channel.all), :id, :name, :include_blank => true%> or new:
+    <%= f.fields_for :channel_attributes do |channel_fields| %>
+      <%= channel_fields.text_field :name %>
+    <% end %>
+  </div>
+
+  <strong><%= f.label :current_season %><br></strong>
+  <%= f.number_field :current_season, class:"form-control" %><br>
+
+  <strong><%= f.label :day %></strong>
+  <%= f.text_field :day, class:"form-control" %>
+  <br>
+
+  <strong><%= f.label :time %></strong>
+  <%= f.text_field :time, class:"form-control" %><br>
+
+  <%= f.hidden_field :created_by, value: current_user.id %>
+  <%= f.submit class: "btn btn-primary" %>
+<% end %>

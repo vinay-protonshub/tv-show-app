@@ -1,0 +1,29 @@
+<% content_for :header do %>
+  <h1><%= @show.title %></h1>
+<% end %>
+
+<% content_for :vertical_nav do %>
+  <ul class="nav flex-column">
+    <li class="nav-item mb-3">
+      <%= button_to "Back to Shows", shows_path, :method => "get", class: "btn btn-info btn-block" %>
+    </li>
+    <% if @show.created_by == current_user.id %>
+      <li class="nav-item mb-3">
+        <%= button_to "Update show details", edit_show_path(@show), :method => "get", class: "btn btn-info btn-block" %>
+      </li>
+    <% end %>
+    <li class="nav-item">
+      <%= button_to "Add to A Watchlist", new_show_listing_path(@show), :method => "get", class: "btn btn-info btn-block" %>
+    </li>
+  </ul>
+<% end %>
+
+<% content_for :content do %>
+  <p><%= @show.description %></p>
+  <p><strong>Channel</strong>: <%= link_to @show.channel.name, channel_path(@show.channel) %></p>
+  <p><strong>Current Season</strong>: <%= @show.current_season %></p>
+
+  <p><strong>Day</strong>: <%= @show.day %></p>
+  <p><strong>Time</strong>: <%= @show.time %></p>
+<% end %>
+
